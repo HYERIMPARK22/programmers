@@ -1,0 +1,18 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(int brown, int yellow) {
+    vector<int> answer;
+    int sum=brown+yellow;
+    int col=1, row;
+    while(1){
+        row=sum/col;
+        if((row-2)*(col-2)==yellow) break;
+        col++;
+    }
+    answer.push_back(row);
+    answer.push_back(col);
+    return answer;
+}
