@@ -1,0 +1,35 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+void bfs(int current, vector<vector<bool>>& graph, vector<int>& distance, vector<int> queue){
+    vector<int> m_queue;
+    while(!queue.empty()){
+        for(int i=1; i<graph.size(); i++){
+            if(graph[queue[0]][i] && !distance[i]){
+                m_queue.push_back(i);
+                distance[i] = current;
+            }
+        }
+        queue.erase(queue.begin());
+    }
+    if(!m_queue.empty())
+        bfs(current+1, graph, distance, m_queue);
+}
+
+int solution(int n, vector<vector<int>> edge) {
+    int answer = 0;
+    vector<vector<bool>> graph(n, vector<bool>(n,false));
+    vector<int> distance(n,0);
+    for(auto e:edge){
+        graph[e[0]-1][e[1]-1] = true;
+        graph[e[1]-1][e[0]-1] = true;
+    }
+    bfs(1, graph, distance, {0});
+    int max = *max_element(distance.begin(), distance.end());
+    for(auto d:distance){
+        if(d==max) answer++;
+    }
+    return answer;
+}
