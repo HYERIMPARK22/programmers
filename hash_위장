@@ -1,0 +1,21 @@
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+int solution(vector<vector<string>> clothes) {
+    int answer = 1;
+    map<string, int> m;
+    
+    //옷 종류별 count
+    for(auto cloth: clothes){
+        m[cloth[1]] += 1;
+    }
+    
+    //옷 개수+1 을 곱하고 최소 한 개의 옷을 입으므로 하나도 입지 않는 경우를 제외함
+    for(auto it = m.begin(); it!=m.end();it++){
+        answer *= it->second + 1;
+    }
+    return answer-1;
+}
