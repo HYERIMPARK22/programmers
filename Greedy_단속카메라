@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool cmp(vector<int> a, vector<int> b) {
+    return a[1]<b[1];
+}
+//진출 시점이 빠른 순서대로 정렬 후 
+//1. 차량의 진입 시점이 카메라보다 앞에 있다면: 카메라 설치 X
+//2. 차량의 진입 시점이 카메라보다 뒤에 있다면: 카메라 설치 O
+int solution(vector<vector<int>> routes) {
+    int answer = 0;
+    int camera = -30001;
+    sort(routes.begin(), routes.end(), cmp);
+    for(int i=0; i<routes.size(); i++){
+        if(camera<routes[i][0]){
+            answer++;
+            camera = routes[i][1];
+            
+        }
+    }
+    return answer;
+}
