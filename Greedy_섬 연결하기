@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//크루스칼 알고리즘
+
 int set[101]; //node의 parent를 저장하는 배열
 
 int getParent(int node) {
@@ -26,7 +28,7 @@ int solution(int n, vector<vector<int>> costs) {
         int start = getParent(costs[i][0]);
         int end = getParent(costs[i][1]);
         int currentCost = costs[i][2];
-        
+        //연결할 두 노드의 parent가 다르다면(연결 가능 상태)
         if(start!=end) {
             set[end] = start;
             answer += currentCost;
